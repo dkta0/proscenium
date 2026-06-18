@@ -1,0 +1,42 @@
+.ProseMirror {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 12pt;
+  line-height: 1.05;
+  background: #fff;
+  color: #111;
+  padding: 1in;
+  width: 8.5in;
+  min-height: 11in;
+  margin: 1rem auto;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+  outline: none;
+}
+.ProseMirror > div {
+  margin: 0;
+  white-space: pre-wrap;
+}
+.el-act_scene {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-top: 1em !important;
+}
+.el-character {
+  text-transform: uppercase;
+  text-align: center;
+}
+.el-dialogue {
+  margin-left: 1in;
+  margin-right: 1in;
+}
+.el-parenthetical {
+  margin-left: 1.5in;
+  font-style: italic;
+}
+.el-stage_direction {
+  font-style: italic;
+  margin-left: 0.5in;
+}
+.el-transition {
+  text-align: right;
+  text-transform: uppercase;
+}
