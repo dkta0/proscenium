@@ -60,7 +60,11 @@ Artifacts are produced under `src-tauri/target/release/bundle/`:
 
 - **Windows:** `.msi` and `.exe` (NSIS)
 - **macOS:** `.dmg` and `.app`
-- **Linux:** `.deb` and `.AppImage`
+- **Linux:** `.deb`, `.rpm`, and `.AppImage`
+
+> The `.deb` and `.rpm` build fully offline. AppImage packaging downloads the
+> `linuxdeploy` helper from GitHub on first run, so it needs network access (the
+> CI workflow handles this on GitHub runners).
 
 A GitHub Actions workflow (`.github/workflows/build.yml`) builds all three
 platforms on tag pushes.
