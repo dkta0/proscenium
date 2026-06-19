@@ -39,6 +39,17 @@ describe("stageplay format", () => {
   });
 });
 
+describe("teleplay format", () => {
+  const tp = FORMATS.teleplay;
+  it("includes act/teaser breaks", () => {
+    expect(tp.elements).toContain("act_scene");
+    expect(tp.labels["act_scene"]).toBe("Act/Teaser");
+  });
+  it("Enter from act_scene goes to scene_heading", () => {
+    expect(nextOnEnter(tp, "act_scene")).toBe("scene_heading");
+  });
+});
+
 describe("element union", () => {
   it("contains every element used by every format", () => {
     for (const fmt of Object.values(FORMATS)) {

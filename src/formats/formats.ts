@@ -28,7 +28,7 @@ export const ALL_ELEMENT_TYPES: ElementType[] = [
   "general",
 ];
 
-export type FormatId = "stageplay" | "screenplay";
+export type FormatId = "stageplay" | "screenplay" | "teleplay";
 
 export interface FormatSpec {
   id: FormatId;
@@ -116,9 +116,51 @@ const SCREENPLAY: FormatSpec = {
   headingElement: "scene_heading",
 };
 
+// TV teleplay: screenplay elements plus act/teaser breaks (act_scene).
+const TELEPLAY: FormatSpec = {
+  id: "teleplay",
+  label: "TV / Teleplay",
+  elements: ["act_scene", "scene_heading", "action", "character", "dialogue", "parenthetical", "transition", "shot", "general"],
+  enter: {
+    act_scene: "scene_heading",
+    scene_heading: "action",
+    action: "action",
+    character: "dialogue",
+    dialogue: "action",
+    parenthetical: "dialogue",
+    transition: "scene_heading",
+    shot: "action",
+    general: "general",
+  },
+  widths: {
+    act_scene: 60,
+    scene_heading: 60,
+    action: 60,
+    character: 38,
+    dialogue: 35,
+    parenthetical: 28,
+    transition: 16,
+    shot: 60,
+    general: 60,
+  },
+  labels: {
+    act_scene: "Act/Teaser",
+    scene_heading: "Scene Heading",
+    action: "Action",
+    character: "Character",
+    dialogue: "Dialogue",
+    parenthetical: "Parenthetical",
+    transition: "Transition",
+    shot: "Shot",
+    general: "General",
+  },
+  headingElement: "scene_heading",
+};
+
 export const FORMATS: Record<FormatId, FormatSpec> = {
   stageplay: STAGEPLAY,
   screenplay: SCREENPLAY,
+  teleplay: TELEPLAY,
 };
 
 export function nextOnEnter(fmt: FormatSpec, current: ElementType): ElementType {
