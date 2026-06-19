@@ -12,6 +12,7 @@ export function Toolbar({
   onView,
   onToggleFind,
   onToggleReports,
+  onToggleCards,
   onChanged,
 }: {
   store: Store;
@@ -19,6 +20,7 @@ export function Toolbar({
   onView: (v: "script" | "title") => void;
   onToggleFind: () => void;
   onToggleReports: () => void;
+  onToggleCards: () => void;
   onChanged: () => void;
 }) {
   const run = async (fn: () => Promise<void>) => {
@@ -93,6 +95,7 @@ export function Toolbar({
         <button onClick={() => onView("title")}>Title Page</button>
         <button onClick={onToggleFind}>Find</button>
         <button onClick={onToggleReports}>Reports</button>
+        <button onClick={onToggleCards}>Index Cards</button>
       </div>
     </div>
   );
