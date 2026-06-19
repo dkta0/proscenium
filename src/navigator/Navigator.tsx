@@ -1,7 +1,16 @@
 import { buildOutline } from "./outline";
+import { ElementType } from "../formats/formats";
 
-export function Navigator({ doc, onJump }: { doc: object; onJump: (index: number) => void }) {
-  const outline = buildOutline(doc);
+export function Navigator({
+  doc,
+  onJump,
+  headingElement = "act_scene",
+}: {
+  doc: object;
+  onJump: (index: number) => void;
+  headingElement?: ElementType;
+}) {
+  const outline = buildOutline(doc, headingElement);
   return (
     <nav className="navigator">
       <h2>Scenes</h2>

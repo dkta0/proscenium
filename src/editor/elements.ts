@@ -1,42 +1,24 @@
-export type ElementType =
-  | "act_scene"
-  | "stage_direction"
-  | "character"
-  | "dialogue"
-  | "parenthetical"
-  | "transition"
-  | "general";
+// Backward-compatible stage-play surface over the format-aware module in
+// src/formats/formats.ts. New code should prefer importing FormatSpec-aware
+// helpers from "../formats/formats"; these bound-to-stageplay exports remain
+// for existing call sites and tests.
+import { FORMATS, ElementType as FmtElementType } from "../formats/formats";
+import * as formats from "../formats/formats";
 
-export const ELEMENT_TYPES: ElementType[] = [
-  "act_scene",
-  "stage_direction",
-  "character",
-  "dialogue",
-  "parenthetical",
-  "transition",
-  "general",
-];
+export type ElementType = FmtElementType;
 
-const ENTER_MAP: Record<ElementType, ElementType> = {
-  act_scene: "stage_direction",
-  stage_direction: "stage_direction",
-  character: "dialogue",
-  dialogue: "stage_direction",
-  parenthetical: "dialogue",
-  transition: "act_scene",
-  general: "general",
-};
+const STAGEPLAY = FORMATS.stageplay;
+
+export const ELEMENT_TYPES: ElementType[] = STAGEPLAY.elements;
 
 export function nextOnEnter(current: ElementType): ElementType {
-  return ENTER_MAP[current];
+  return formats.nextOnEnter(STAGEPLAY, current);
 }
 
 export function cycleForward(current: ElementType): ElementType {
-  const i = ELEMENT_TYPES.indexOf(current);
-  return ELEMENT_TYPES[(i + 1) % ELEMENT_TYPES.length];
+  return formats.cycleForward(STAGEPLAY, current);
 }
 
 export function cycleBackward(current: ElementType): ElementType {
-  const i = ELEMENT_TYPES.indexOf(current);
-  return ELEMENT_TYPES[(i - 1 + ELEMENT_TYPES.length) % ELEMENT_TYPES.length];
+  return formats.cycleBackward(STAGEPLAY, current);
 }

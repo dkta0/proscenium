@@ -1,19 +1,9 @@
 import { Editor } from "@tiptap/core";
 import * as files from "../io/files";
 import * as cmd from "./commands";
-import { ELEMENT_TYPES, ElementType } from "../editor/elements";
 import { setElement } from "../editor/keymap";
+import { ElementType, FormatId, FORMATS } from "../formats/formats";
 import { Store } from "../state/store";
-
-const ELEMENT_LABELS: Record<ElementType, string> = {
-  act_scene: "Act/Scene",
-  stage_direction: "Stage Direction",
-  character: "Character",
-  dialogue: "Dialogue",
-  parenthetical: "Parenthetical",
-  transition: "Transition",
-  general: "General",
-};
 
 export function Toolbar({
   store,
@@ -33,6 +23,17 @@ export function Toolbar({
     onChanged();
   };
 
+  const format = FORMATS[store.getState().osp.format];
+  const currentType = editor
+    ? (editor.state.selection.$from.parent.type.name as ElementType)
+    : format.elements[0];
+
+  const setFormat = (id: FormatId) => {
+    store.getState().osp.format = id;
+    store.markDirty();
+    onChanged();
+  };
+
   return (
     <div className="toolbar">
       <div className="group">
@@ -45,13 +46,25 @@ export function Toolbar({
         <button onClick={() => run(() => cmd.exportPdfFile(store, files))}>Export PDF</button>
       </div>
       <div className="group">
+        <label className="field">
+          Format
+          <select value={format.id} onChange={(e) => setFormat(e.target.value as FormatId)}>
+            {Object.values(FORMATS).map((f) => (
+              <option key={f.id} value={f.id}>
+                {f.label}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+      <div className="group">
         <select
-          value={editor ? (editor.state.selection.$from.parent.type.name as ElementType) : "general"}
+          value={currentType}
           onChange={(e) => editor && setElement(editor, e.target.value as ElementType)}
         >
-          {ELEMENT_TYPES.map((t) => (
+          {format.elements.map((t) => (
             <option key={t} value={t}>
-              {ELEMENT_LABELS[t]}
+              {format.labels[t] ?? t}
             </option>
           ))}
         </select>

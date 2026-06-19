@@ -2,7 +2,7 @@ import { Node, Extension } from "@tiptap/core";
 import Document from "@tiptap/extension-document";
 import Text from "@tiptap/extension-text";
 import History from "@tiptap/extension-history";
-import { ELEMENT_TYPES, ElementType } from "./elements";
+import { ALL_ELEMENT_TYPES as ELEMENT_TYPES, ElementType } from "../formats/formats";
 
 function elementNode(type: ElementType): Node {
   return Node.create({

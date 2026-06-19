@@ -15,10 +15,18 @@
   margin: 0;
   white-space: pre-wrap;
 }
-.el-act_scene {
+.el-act_scene,
+.el-scene_heading {
   font-weight: bold;
   text-transform: uppercase;
   margin-top: 1em !important;
+}
+.el-action {
+  margin: 0;
+}
+.el-shot {
+  font-weight: bold;
+  text-transform: uppercase;
 }
 .el-character {
   text-transform: uppercase;

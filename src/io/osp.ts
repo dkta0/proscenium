@@ -1,3 +1,5 @@
+import { FormatId } from "../formats/formats";
+
 export const OSP_SCHEMA_VERSION = 1;
 
 export interface TitlePage {
@@ -15,14 +17,16 @@ export interface SmartTypeLists {
 
 export interface OspDocument {
   schemaVersion: number;
+  format: FormatId;
   titlePage: TitlePage;
   doc: object;
   smartTypeLists: SmartTypeLists;
 }
 
-export function emptyOsp(): OspDocument {
+export function emptyOsp(format: FormatId = "stageplay"): OspDocument {
   return {
     schemaVersion: OSP_SCHEMA_VERSION,
+    format,
     titlePage: { title: "", author: "", contact: "", draftDate: "" },
     doc: { type: "doc", content: [{ type: "general", content: [] }] },
     smartTypeLists: { characters: [], scenes: [], transitions: [] },
@@ -38,5 +42,6 @@ export function deserializeOsp(json: string): OspDocument {
   if (parsed.schemaVersion !== OSP_SCHEMA_VERSION) {
     throw new Error(`Unsupported schema version: ${parsed.schemaVersion}`);
   }
+  if (!parsed.format) parsed.format = "stageplay";
   return parsed;
 }

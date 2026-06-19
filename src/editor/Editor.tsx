@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { Editor } from "@tiptap/core";
 import { useEditor, EditorContent } from "@tiptap/react";
 import { buildExtensions } from "./schema";
-import { KeymapExtension, currentElement } from "./keymap";
-import { ElementType } from "./elements";
+import { makeKeymap, currentElement } from "./keymap";
+import { ElementType, FORMATS } from "../formats/formats";
 import { harvest } from "../smarttype/harvest";
 import { suggest } from "../smarttype/harvest";
 import { SuggestionList } from "../smarttype/SmartType";
@@ -15,6 +15,7 @@ import "./elements.css";
 const SMARTTYPE_ELEMENTS: Record<string, keyof SmartTypeLists> = {
   character: "characters",
   act_scene: "scenes",
+  scene_heading: "scenes",
   transition: "transitions",
 };
 
@@ -28,7 +29,7 @@ export function StagePlayEditor({ store, onEditor }: { store: Store; onEditor?: 
   const [active, setActive] = useState(0);
 
   const editor = useEditor({
-    extensions: [...buildExtensions(), KeymapExtension],
+    extensions: [...buildExtensions(), makeKeymap(() => FORMATS[store.getState().osp.format])],
     content: store.getState().osp.doc as any,
     editorProps: { attributes: { spellcheck: "true" } },
     onUpdate: ({ editor }) => {

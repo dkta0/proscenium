@@ -6,6 +6,7 @@ import { FindBar } from "./ui/FindBar";
 import { Navigator } from "./navigator/Navigator";
 import { TitlePageEditor } from "./ui/TitlePageEditor";
 import { createStore } from "./state/store";
+import { FORMATS } from "./formats/formats";
 import "./App.css";
 
 export default function App() {
@@ -40,7 +41,11 @@ export default function App() {
       />
       {showFind && <FindBar editor={editor} onClose={() => setShowFind(false)} />}
       <div className="body">
-        <Navigator doc={store.getState().osp.doc} onJump={jumpToBlock} />
+        <Navigator
+          doc={store.getState().osp.doc}
+          onJump={jumpToBlock}
+          headingElement={FORMATS[store.getState().osp.format].headingElement}
+        />
         <main>
           {view === "script" ? (
             <StagePlayEditor store={store} onEditor={setEditor} />
