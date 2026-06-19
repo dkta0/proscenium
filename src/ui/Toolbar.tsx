@@ -3,6 +3,7 @@ import * as files from "../io/files";
 import * as cmd from "./commands";
 import { setElement } from "../editor/keymap";
 import { ElementType, FormatId, FORMATS } from "../formats/formats";
+import { revisionAt, nextRevisionIndex } from "../production/revisions";
 import { Store } from "../state/store";
 
 export function Toolbar({
@@ -32,6 +33,14 @@ export function Toolbar({
 
   const setFormat = (id: FormatId) => {
     store.getState().osp.format = id;
+    store.markDirty();
+    onChanged();
+  };
+
+  const revIndex = store.getState().osp.revisionIndex;
+  const revision = revisionAt(revIndex);
+  const advanceRevision = () => {
+    store.getState().osp.revisionIndex = nextRevisionIndex(revIndex);
     store.markDirty();
     onChanged();
   };
@@ -72,6 +81,12 @@ export function Toolbar({
             </option>
           ))}
         </select>
+      </div>
+      <div className="group">
+        <span className="revision-chip" style={{ background: revision.color }} title={revision.name}>
+          {revision.name}
+        </span>
+        <button onClick={advanceRevision}>New Revision</button>
       </div>
       <div className="group">
         <button onClick={() => onView("script")}>Script</button>
