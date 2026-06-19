@@ -45,6 +45,8 @@ export function Toolbar({
       <div className="group">
         <button onClick={() => run(() => cmd.importFountainFile(store, files))}>Import .fountain</button>
         <button onClick={() => run(() => cmd.exportFountainFile(store, files))}>Export .fountain</button>
+        <button onClick={() => run(() => cmd.importFdxFile(store, files))}>Import .fdx</button>
+        <button onClick={() => run(() => cmd.exportFdxFile(store, files))}>Export .fdx</button>
         <button onClick={() => run(() => cmd.exportPdfFile(store, files))}>Export PDF</button>
       </div>
       <div className="group">

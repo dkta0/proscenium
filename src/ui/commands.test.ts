@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { openOsp, importFountainFile } from "./commands";
+import { openOsp, importFountainFile, importFdxFile } from "./commands";
 import { createStore } from "../state/store";
 import { emptyOsp, serializeOsp } from "../io/osp";
 
@@ -36,5 +36,18 @@ describe("commands", () => {
     await importFountainFile(store, io);
     const content = (store.getState().osp.doc as any).content;
     expect(content[0].type).toBe("character");
+  });
+
+  it("importFdxFile fills the doc from FDX xml", async () => {
+    const fdx =
+      '<FinalDraft><Content><Paragraph Type="Scene Heading"><Text>INT. X - DAY</Text></Paragraph></Content></FinalDraft>';
+    const io = fakeIo({
+      openDialog: vi.fn().mockResolvedValue("/x.fdx"),
+      readTextFile: vi.fn().mockResolvedValue(fdx),
+    });
+    const store = createStore();
+    await importFdxFile(store, io);
+    const content = (store.getState().osp.doc as any).content;
+    expect(content[0].type).toBe("scene_heading");
   });
 });
