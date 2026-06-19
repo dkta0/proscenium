@@ -259,11 +259,17 @@ spec → plan → implement cycle:
 | Revision drafts (Final Draft color sequence) | ✅ Done |
 | Index cards / scene view (Beat Board) | ✅ Done |
 | FDX import/export | ✅ Done |
-| Comic / manuscript templates | ⏳ Pending |
+| Comic + manuscript templates | ✅ Done |
+| Production breakdown tagging (cast/props/…) | ✅ Done |
+| Custom spelling dictionary (module) | ✅ Done |
 | Story Map | ⏳ Pending |
-| Page locking, tagging/breakdown | ⏳ Pending |
-| Collaboration / ScriptNotes | ⏳ Pending |
-| Custom spelling dictionary | ⏳ Pending |
+| Page locking | ⏳ Pending |
+| Real-time collaboration / ScriptNotes | ⏳ Pending (needs backend — see note) |
+
+> **Real-time collaboration** is the one remaining headline Final Draft feature
+> that cannot be built as a self-contained desktop change: it requires a sync
+> backend (CRDT/WebSocket server, accounts, hosting). That's an architecture
+> decision for the user, not something to assume — it warrants its own spec.
 
 The architecture choices in Phase 1 (data-driven element/margin tables, schema
 versioning, frontend-owned document logic) are made specifically to make these
