@@ -233,14 +233,33 @@ Phase 1 (this spec) is the foundation. Subsequent phases each get their own
 spec → plan → implement cycle:
 
 - **Phase 2 — Document types:** screenplay + TV formats reusing the element
-  table and pagination engine.
+  table and pagination engine. _(Screenplay delivered: format registry with
+  per-format element sets, transitions, margins, and a document-type switcher.
+  TV templates still pending.)_
 - **Phase 3 — Planning tools:** Beat Board, Story Map, index cards / scene
-  navigator enhancements.
+  navigator enhancements. _(Pending.)_
 - **Phase 4 — Production:** scene numbering, revisions / colored pages, page
-  locking, tagging, reports.
+  locking, tagging, reports. _(Reports delivered: character / scene / location.
+  Scene numbering, revisions, page locking, tagging still pending.)_
 - **Phase 5 — Collaboration:** ScriptNotes, comments, real-time co-writing.
+  _(Pending.)_
 - **Phase 6 — Interop:** FDX read/write for drop-in Final Draft compatibility;
-  custom spelling dictionaries.
+  custom spelling dictionaries. _(FDX import/export delivered. Custom dictionary
+  pending.)_
+
+### Delivered beyond Phase 1 (status as of 2026-06-18)
+
+| Feature | Status |
+| --- | --- |
+| Stage-play editor (full Phase 1) | ✅ Done |
+| Screenplay document type | ✅ Done |
+| Production reports (character/scene/location) | ✅ Done |
+| FDX import/export | ✅ Done |
+| TV/comic/manuscript templates | ⏳ Pending |
+| Beat Board / Story Map / index cards | ⏳ Pending |
+| Scene numbering, revisions, page locking, tagging | ⏳ Pending |
+| Collaboration / ScriptNotes | ⏳ Pending |
+| Custom spelling dictionary | ⏳ Pending |
 
 The architecture choices in Phase 1 (data-driven element/margin tables, schema
 versioning, frontend-owned document logic) are made specifically to make these

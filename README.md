@@ -1,29 +1,35 @@
 # Proscenium
 
-An open-source **stage-play writing app** — a cross-platform, free alternative to
-Final Draft, focused (in this first phase) on the stage-play format.
+An open-source, cross-platform, free alternative to Final Draft for writing
+**stage plays and screenplays**.
 
-Proscenium is **Phase 1** of a roadmap toward an open Final Draft. It is a
-genuinely usable playwriting tool today; later phases extend toward screenplay/TV
-formats, planning tools, production features, and collaboration (see
-`docs/superpowers/specs/`).
+Proscenium began as a stage-play editor (Phase 1) and is growing toward broader
+Final Draft parity. Already delivered beyond the stage-play core: screenplay
+document type, production reports, and Final Draft `.fdx` interop. Remaining
+roadmap items (TV templates, Beat Board/Story Map, revisions/page-locking,
+real-time collaboration) are tracked in `docs/superpowers/specs/`.
 
 ## Features
 
-- **Structured editor** with industry-style stage-play elements: Act/Scene
-  headings, Stage Directions, Character cues, Dialogue, Parentheticals,
-  Transitions, and General text.
+- **Structured editor** with industry-style elements per document type — stage
+  play (Act/Scene, Stage Direction, Character, Dialogue, Parenthetical,
+  Transition) and screenplay (Scene Heading, Action, Character, Dialogue,
+  Parenthetical, Transition, Shot).
+- **Document-type switcher** — write in stage-play or screenplay format; element
+  set, Enter/Tab transitions, and page margins adapt to the chosen format.
 - **Final Draft-style element cycling** — `Enter` and `Tab`/`Shift+Tab` flow
-  between element types as you write (Character → Dialogue → Stage Direction …).
-- **SmartType autocomplete** for character names, act/scene headings, and
+  between element types as you write (Character → Dialogue → Action …).
+- **SmartType autocomplete** for character names, scene/act headings, and
   transitions, learned live from your script.
-- **Stage-play formatting** in Courier 12 on US-Letter page geometry, with
-  pagination and page numbers.
+- **Formatting** in Courier 12 on US-Letter page geometry, with pagination and
+  page numbers.
 - **Scene/Act navigator** for jump-navigation.
+- **Production reports** — character (speeches/words), scene-to-page, and
+  location breakdowns.
 - **Find & replace** and webview-native spellcheck.
 - **Title-page editor**.
-- **File formats:** native `.osp` (JSON), **Fountain** import/export, and **PDF**
-  export.
+- **File formats:** native `.osp` (JSON), **Fountain** import/export,
+  **Final Draft `.fdx`** import/export, and **PDF** export.
 - **Cross-platform:** native desktop builds for Windows, macOS, and Linux via
   Tauri.
 
@@ -73,10 +79,12 @@ platforms on tag pushes.
 
 ```
 src/
-  editor/      element types, Tiptap schema, keymap, pagination, find
-  io/          .osp, Fountain, PDF, block<->doc conversion, file commands
+  formats/     document-type definitions (stage play, screenplay)
+  editor/      Tiptap schema, keymap, pagination, find
+  io/          .osp, Fountain, FDX, PDF, block<->doc conversion, file commands
   smarttype/   list harvesting + autocomplete UI
   navigator/   scene/act outline
+  reports/     character / scene / location reports + panel
   state/       document store (dirty-state tracking)
   ui/          toolbar, find bar, title-page editor, file commands
 src-tauri/     Rust shell (file dialogs + read/write commands)
