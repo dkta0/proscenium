@@ -5,6 +5,7 @@ import { Toolbar } from "./ui/Toolbar";
 import { FindBar } from "./ui/FindBar";
 import { Navigator } from "./navigator/Navigator";
 import { TitlePageEditor } from "./ui/TitlePageEditor";
+import { ReportsPanel } from "./reports/ReportsPanel";
 import { createStore } from "./state/store";
 import { FORMATS } from "./formats/formats";
 import "./App.css";
@@ -14,6 +15,7 @@ export default function App() {
   const [editor, setEditor] = useState<Editor | null>(null);
   const [view, setView] = useState<"script" | "title">("script");
   const [showFind, setShowFind] = useState(false);
+  const [showReports, setShowReports] = useState(false);
   const [, forceRender] = useState(0);
   const rerender = () => forceRender((n) => n + 1);
 
@@ -37,9 +39,11 @@ export default function App() {
           rerender();
         }}
         onToggleFind={() => setShowFind((s) => !s)}
+        onToggleReports={() => setShowReports((s) => !s)}
         onChanged={rerender}
       />
       {showFind && <FindBar editor={editor} onClose={() => setShowFind(false)} />}
+      {showReports && <ReportsPanel store={store} onClose={() => setShowReports(false)} />}
       <div className="body">
         <Navigator
           doc={store.getState().osp.doc}
