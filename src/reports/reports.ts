@@ -1,6 +1,7 @@
 import { Block } from "../io/fountain";
 import { ElementType, FormatSpec } from "../formats/formats";
 import { paginate } from "../editor/pagination";
+import { numberScenes } from "../production/sceneNumbers";
 
 export interface CharacterStat {
   name: string;
@@ -9,6 +10,7 @@ export interface CharacterStat {
 }
 
 export interface SceneStat {
+  number: string;
   heading: string;
   page: number;
   index: number;
@@ -49,10 +51,11 @@ export function characterReport(blocks: Block[]): CharacterStat[] {
 /** Scene report: each heading with the page it falls on. */
 export function sceneReport(blocks: Block[], format?: FormatSpec): SceneStat[] {
   const pages = paginate(blocks, format?.widths);
+  const numbers = numberScenes(blocks);
   const out: SceneStat[] = [];
   blocks.forEach((b, index) => {
     if (HEADING_ELEMENTS.includes(b.type)) {
-      out.push({ heading: b.text, page: pages[index], index });
+      out.push({ number: numbers[index] ?? "", heading: b.text, page: pages[index], index });
     }
   });
   return out;

@@ -46,7 +46,8 @@ export function ReportsPanel({ store, onClose }: { store: Store; onClose: () => 
           <ol>
             {scenes.map((s) => (
               <li key={s.index}>
-                {s.heading} <span className="page">p.{s.page}</span>
+                <span className="scene-no">{s.number}</span> {s.heading}{" "}
+                <span className="page">p.{s.page}</span>
               </li>
             ))}
           </ol>
