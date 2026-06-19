@@ -253,11 +253,15 @@ spec → plan → implement cycle:
 | --- | --- |
 | Stage-play editor (full Phase 1) | ✅ Done |
 | Screenplay document type | ✅ Done |
+| TV / Teleplay document type | ✅ Done |
 | Production reports (character/scene/location) | ✅ Done |
+| Scene numbering | ✅ Done |
+| Revision drafts (Final Draft color sequence) | ✅ Done |
+| Index cards / scene view (Beat Board) | ✅ Done |
 | FDX import/export | ✅ Done |
-| TV/comic/manuscript templates | ⏳ Pending |
-| Beat Board / Story Map / index cards | ⏳ Pending |
-| Scene numbering, revisions, page locking, tagging | ⏳ Pending |
+| Comic / manuscript templates | ⏳ Pending |
+| Story Map | ⏳ Pending |
+| Page locking, tagging/breakdown | ⏳ Pending |
 | Collaboration / ScriptNotes | ⏳ Pending |
 | Custom spelling dictionary | ⏳ Pending |
 

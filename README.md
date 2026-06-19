@@ -3,11 +3,12 @@
 An open-source, cross-platform, free alternative to Final Draft for writing
 **stage plays and screenplays**.
 
-Proscenium began as a stage-play editor (Phase 1) and is growing toward broader
-Final Draft parity. Already delivered beyond the stage-play core: screenplay
-document type, production reports, and Final Draft `.fdx` interop. Remaining
-roadmap items (TV templates, Beat Board/Story Map, revisions/page-locking,
-real-time collaboration) are tracked in `docs/superpowers/specs/`.
+Proscenium began as a stage-play editor and is growing toward broader Final
+Draft parity. Already delivered: stage-play, screenplay, and TV/teleplay document
+types; production reports; scene numbering; revision drafts; index cards; and
+Final Draft `.fdx` interop. Remaining roadmap items (Story Map, page-locking,
+tagging, real-time collaboration, custom dictionary) are tracked in
+`docs/superpowers/specs/`.
 
 ## Features
 
@@ -15,8 +16,12 @@ real-time collaboration) are tracked in `docs/superpowers/specs/`.
   play (Act/Scene, Stage Direction, Character, Dialogue, Parenthetical,
   Transition) and screenplay (Scene Heading, Action, Character, Dialogue,
   Parenthetical, Transition, Shot).
-- **Document-type switcher** — write in stage-play or screenplay format; element
-  set, Enter/Tab transitions, and page margins adapt to the chosen format.
+- **Document-type switcher** — write in stage-play, screenplay, or TV/teleplay
+  format; element set, Enter/Tab transitions, and page margins adapt to the
+  chosen format.
+- **Production tools** — sequential scene numbering and Final Draft-style
+  revision drafts (Production White → Blue → Pink → …).
+- **Index cards** — Beat Board-style scene view with synopses and click-to-jump.
 - **Final Draft-style element cycling** — `Enter` and `Tab`/`Shift+Tab` flow
   between element types as you write (Character → Dialogue → Action …).
 - **SmartType autocomplete** for character names, scene/act headings, and
@@ -85,6 +90,8 @@ src/
   smarttype/   list harvesting + autocomplete UI
   navigator/   scene/act outline
   reports/     character / scene / location reports + panel
+  production/  scene numbering, revision drafts
+  planning/    index cards / scene view
   state/       document store (dirty-state tracking)
   ui/          toolbar, find bar, title-page editor, file commands
 src-tauri/     Rust shell (file dialogs + read/write commands)
