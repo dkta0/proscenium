@@ -50,6 +50,21 @@ describe("teleplay format", () => {
   });
 });
 
+describe("comic + manuscript formats", () => {
+  it("comic relabels elements as pages/panels/balloons", () => {
+    const c = FORMATS.comic;
+    expect(c.labels["act_scene"]).toBe("Page");
+    expect(c.labels["shot"]).toBe("Panel");
+    expect(c.labels["dialogue"]).toBe("Balloon");
+  });
+  it("manuscript uses chapters and paragraphs", () => {
+    const m = FORMATS.manuscript;
+    expect(m.labels["act_scene"]).toBe("Chapter");
+    expect(m.labels["general"]).toBe("Paragraph");
+    expect(nextOnEnter(m, "general")).toBe("general");
+  });
+});
+
 describe("element union", () => {
   it("contains every element used by every format", () => {
     for (const fmt of Object.values(FORMATS)) {

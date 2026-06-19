@@ -1,4 +1,5 @@
 import { characterReport, sceneReport, locationReport } from "./reports";
+import { breakdown, autoTagCast } from "../production/tags";
 import { docToBlocks } from "../io/blocks";
 import { FORMATS } from "../formats/formats";
 import { Store } from "../state/store";
@@ -9,6 +10,7 @@ export function ReportsPanel({ store, onClose }: { store: Store; onClose: () => 
   const characters = characterReport(blocks);
   const scenes = sceneReport(blocks, format);
   const locations = locationReport(blocks);
+  const groups = breakdown(autoTagCast(blocks));
 
   return (
     <div className="reports-overlay" onClick={onClose}>
@@ -64,6 +66,16 @@ export function ReportsPanel({ store, onClose }: { store: Store; onClose: () => 
             ))}
           </ul>
           {locations.length === 0 && <p className="empty">No locations yet</p>}
+        </section>
+
+        <section>
+          <h3>Production Breakdown</h3>
+          {groups.map((g) => (
+            <div key={g.category}>
+              <strong>{g.category}</strong>: {g.items.join(", ")}
+            </div>
+          ))}
+          {groups.length === 0 && <p className="empty">Nothing to break down yet</p>}
         </section>
       </div>
     </div>

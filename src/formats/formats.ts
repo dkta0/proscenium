@@ -28,7 +28,7 @@ export const ALL_ELEMENT_TYPES: ElementType[] = [
   "general",
 ];
 
-export type FormatId = "stageplay" | "screenplay" | "teleplay";
+export type FormatId = "stageplay" | "screenplay" | "teleplay" | "comic" | "manuscript";
 
 export interface FormatSpec {
   id: FormatId;
@@ -157,10 +157,67 @@ const TELEPLAY: FormatSpec = {
   headingElement: "scene_heading",
 };
 
+// Comic script: pages and panels, with description, dialogue, caption, and SFX.
+const COMIC: FormatSpec = {
+  id: "comic",
+  label: "Comic",
+  elements: ["act_scene", "shot", "stage_direction", "character", "dialogue", "transition", "general"],
+  enter: {
+    act_scene: "shot",
+    shot: "stage_direction",
+    stage_direction: "character",
+    character: "dialogue",
+    dialogue: "character",
+    transition: "shot",
+    general: "general",
+  },
+  widths: {
+    act_scene: 60,
+    shot: 60,
+    stage_direction: 58,
+    character: 38,
+    dialogue: 45,
+    transition: 60,
+    general: 60,
+  },
+  labels: {
+    act_scene: "Page",
+    shot: "Panel",
+    stage_direction: "Description",
+    character: "Character",
+    dialogue: "Balloon",
+    transition: "Caption",
+    general: "General",
+  },
+  headingElement: "act_scene",
+};
+
+// Manuscript / prose: chapters and paragraphs.
+const MANUSCRIPT: FormatSpec = {
+  id: "manuscript",
+  label: "Manuscript",
+  elements: ["act_scene", "general"],
+  enter: {
+    act_scene: "general",
+    general: "general",
+  },
+  widths: {
+    act_scene: 60,
+    general: 70,
+  },
+  labels: {
+    act_scene: "Chapter",
+    general: "Paragraph",
+  },
+  headingElement: "act_scene",
+};
+
 export const FORMATS: Record<FormatId, FormatSpec> = {
   stageplay: STAGEPLAY,
   screenplay: SCREENPLAY,
   teleplay: TELEPLAY,
+  comic: COMIC,
+  manuscript: MANUSCRIPT,
 };
 
 export function nextOnEnter(fmt: FormatSpec, current: ElementType): ElementType {
