@@ -1,11 +1,12 @@
 when:
   - event: pull_request
     branch: master
+    path:
+      exclude: ['**/*.md', 'docs/**']
   - event: push
     branch: master
-
-labels:
-  location: daimon
+    path:
+      exclude: ['**/*.md', 'docs/**']
 
 clone:
   git:
